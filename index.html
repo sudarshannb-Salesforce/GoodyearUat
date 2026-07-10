@@ -374,17 +374,17 @@
     </footer>
 
     <!-- Embedded Messaging snippet -->
-    <script type='text/javascript'>
+	<script type='text/javascript'>
 		function initEmbeddedMessaging() {
 			try {
 				embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 	
 				embeddedservice_bootstrap.init(
-					'00DTI000002wPxm',
+					'00DcW0000030ZIc',
 					'GY_Service_Chat_Support',
-					'https://goodyearmvp--elevatedev.sandbox.my.site.com/ESWGYServiceChatSuppor1779987171907',
+					'https://goodyearmvp--uat.sandbox.my.site.com/ESWGYServiceChatSuppor1783704840834',
 					{
-						scrt2URL: 'https://goodyearmvp--elevatedev.sandbox.my.salesforce-scrt.com'
+						scrt2URL: 'https://goodyearmvp--uat.sandbox.my.salesforce-scrt.com'
 					}
 				);
 			} catch (err) {
@@ -392,7 +392,8 @@
 			}
 		};
 	</script>
-	<script type='text/javascript' src='https://goodyearmvp--elevatedev.sandbox.my.site.com/ESWGYServiceChatSuppor1779987171907/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+	<script type='text/javascript' src='https://goodyearmvp--uat.sandbox.my.site.com/ESWGYServiceChatSuppor1783704840834/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 
     <!-- GYChatChipRelayv5 — auto-message + chip-click relay (verbatim copy of the Salesforce static resource) -->
     <script type='text/javascript'>
@@ -408,7 +409,7 @@
 				// VF host page origin
 		        //window.location.origin,
 		        // Embedded Messaging / Experience Cloud host origin, please keep it as is
-		        'https://goodyearmvp--elevatedev.sandbox.my.site.com',
+		        'https://goodyearmvp--uat.sandbox.my.site.com', 
 		        // Optional VF canonical domain variant --  update below url to your webpage
 		        //'https://goodyearmvp--elevatedev--c.sandbox.vf.force.com'
 		    ];
