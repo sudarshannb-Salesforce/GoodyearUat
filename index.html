@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goodyear</title>
+
+    <!-- Oswald approximates Goodyear's condensed, uppercase headline type (futura-pt-condensed) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --gy-navy:   #0b1d45;  /* primary dark brand */
+            --gy-yellow: #fbbd00;  /* Goodyear yellow */
+            --gy-blue:   #224ff2;  /* bright accent blue */
+            --gy-slate:  #27455c;
+            --gy-ink:    #231f20;
+            --gy-gray:   #767676;
+            --gy-line:   #e6e8ee;
+            --bg:        #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+            color: var(--gy-ink);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .display {
+            font-family: "Oswald", "Arial Narrow", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin: 0;
+        }
+
+        a { color: inherit; }
+
+        /* ---------- Top utility bar ---------- */
+        .utility {
+            background: var(--gy-ink);
+            color: #cfd3da;
+            font-size: .78rem;
+            padding: 7px 32px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 22px;
+        }
+        .utility a { text-decoration: none; opacity: .85; }
+        .utility a:hover { opacity: 1; color: var(--gy-yellow); }
+
+        /* ---------- Main nav ---------- */
+        header.nav {
+            background: var(--gy-navy);
+            color: #fff;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 0 var(--gy-yellow);
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Oswald", sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .brand .wing { color: var(--gy-yellow); font-size: 1.6rem; }
+        header.nav nav { display: flex; align-items: center; gap: 26px; }
+        header.nav nav a {
+            color: #fff;
+            text-decoration: none;
+            font-family: "Oswald", sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: .95rem;
+            letter-spacing: .6px;
+            opacity: .92;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color .15s, opacity .15s;
+        }
+        header.nav nav a:hover { opacity: 1; border-bottom-color: var(--gy-yellow); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Oswald", sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 13px 26px;
+            border-radius: 2px;
+            font-size: .95rem;
+            transition: transform .08s ease, filter .15s ease;
+        }
+        .btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+        .btn-yellow { background: var(--gy-yellow); color: var(--gy-ink); }
+        .btn-blue   { background: var(--gy-blue);   color: #fff; }
+        .btn-ghost  { background: transparent; color: #fff; border: 2px solid #fff; padding: 11px 24px; }
+        .btn .arrow { font-size: 1.1em; line-height: 1; }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            background:
+                linear-gradient(180deg, rgba(11,29,69,.78) 0%, rgba(11,29,69,.55) 60%, rgba(11,29,69,.85) 100%),
+                radial-gradient(1200px 500px at 70% 0%, #2a4a8f 0%, var(--gy-navy) 55%);
+            color: #fff;
+            padding: 96px 32px 104px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 6px;
+            background: var(--gy-yellow);
+        }
+        .hero h1 {
+            font-size: clamp(2.6rem, 6vw, 4.4rem);
+            font-weight: 700;
+            line-height: .98;
+        }
+        .hero h1 .accent { color: var(--gy-yellow); }
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 620px;
+            margin: 18px auto 30px;
+            opacity: .95;
+            text-transform: none;
+            font-family: "Inter", sans-serif;
+        }
+        .hero .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+        /* ---------- Feature strip ---------- */
+        .strip {
+            background: var(--gy-yellow);
+            color: var(--gy-ink);
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            padding: 16px 32px;
+            font-family: "Oswald", sans-serif;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: .6px;
+            font-size: .92rem;
+        }
+        .strip span { display: inline-flex; align-items: center; gap: 8px; }
+
+        /* ---------- Main content ---------- */
+        main { max-width: 1120px; margin: 0 auto; padding: 64px 24px 40px; }
+
+        .section-head { text-align: center; margin-bottom: 38px; }
+        .section-head h2 { font-size: 2.2rem; font-weight: 700; color: var(--gy-navy); }
+        .section-head .rule { width: 64px; height: 4px; background: var(--gy-yellow); margin: 14px auto 0; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 26px; }
+        .card {
+            background: #fff;
+            border: 1px solid var(--gy-line);
+            border-radius: 6px;
+            padding: 30px 28px;
+            transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+        }
+        .card:hover { box-shadow: 0 12px 30px rgba(11,29,69,.12); transform: translateY(-3px); border-color: transparent; }
+        .card .icon {
+            width: 46px; height: 46px; border-radius: 6px;
+            background: var(--gy-navy); color: var(--gy-yellow);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin-bottom: 16px;
+        }
+        .card h3 { font-size: 1.3rem; color: var(--gy-navy); margin-bottom: 8px; }
+        .card p { margin: 0 0 14px; color: #4a4f57; }
+        .card a.more {
+            font-family: "Oswald", sans-serif; text-transform: uppercase;
+            font-weight: 600; font-size: .85rem; letter-spacing: .6px;
+            color: var(--gy-blue); text-decoration: none;
+        }
+        .card a.more:hover { text-decoration: underline; }
+
+        /* ---------- CTA band ---------- */
+        .band {
+            margin-top: 64px;
+            background: var(--gy-navy);
+            color: #fff;
+            border-radius: 8px;
+            padding: 48px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .band h2 { font-size: 2rem; font-weight: 700; }
+        .band p { margin: 6px 0 0; opacity: .85; text-transform: none; font-family: "Inter", sans-serif; }
+
+        /* ---------- Footer ---------- */
+        footer {
+            background: var(--gy-ink);
+            color: #b8bcc4;
+            margin-top: 72px;
+            padding: 48px 32px 26px;
+        }
+        .footer-top {
+            max-width: 1120px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 24px; flex-wrap: wrap;
+            padding-bottom: 28px; border-bottom: 1px solid #3a3637;
+        }
+        .footer-top .news h3 { color: #fff; font-size: 1.4rem; font-weight: 700; }
+        .footer-top .news p { margin: 4px 0 0; font-size: .9rem; }
+        .news-form { display: flex; gap: 8px; }
+        .news-form input {
+            border: 1px solid #4a4647; background: #2a2627; color: #fff;
+            padding: 12px 14px; border-radius: 2px; min-width: 240px; font-size: .9rem;
+        }
+        .footer-bottom {
+            max-width: 1120px; margin: 22px auto 0;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 16px; flex-wrap: wrap; font-size: .8rem;
+        }
+        .footer-bottom .links a { color: #b8bcc4; text-decoration: none; margin-right: 18px; }
+        .footer-bottom .links a:hover { color: var(--gy-yellow); }
+        .socials { display: flex; gap: 14px; font-size: 1.1rem; }
+        .socials a:hover { color: var(--gy-yellow); }
+    </style>
+</head>
+<body>
+    <!-- Top utility bar -->
+    <div class="utility">
+        <a href="#">Update Location</a>
+        <a href="#">Find an Installer</a>
+        <a href="#">Sign In</a>
+    </div>
+
+    <!-- Main navigation -->
+    <header class="nav">
+        <div class="brand"><span class="wing">»</span> GOODYEAR</div>
+        <nav>
+            <a href="#">Tires</a>
+            <a href="#">Services</a>
+            <a href="#">Signature Shop</a>
+            <a href="#">Rebates</a>
+            <a href="#">Resources</a>
+            <a href="#" class="btn btn-yellow" style="padding:10px 20px;">Find Tires <span class="arrow">→</span></a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Make Corners.<br /><span class="accent">Not Excuses.</span></h1>
+        <p>Grip, performance and unmatched confidence come standard. Find the right tires for your drive.</p>
+        <div class="cta-row">
+            <a href="#" class="btn btn-yellow">Find Your Fit <span class="arrow">→</span></a>
+            <a href="#" class="btn btn-ghost">Shop Eagle Tires</a>
+        </div>
+    </section>
+
+    <!-- Feature strip -->
+    <div class="strip">
+        <span>✓ Free Installation</span>
+        <span>✓ 30-Day Test Drive</span>
+        <span>✓ Nationwide Warranty</span>
+        <span>✓ Mobile Garage Service</span>
+    </div>
+
+    <!-- Content -->
+    <main>
+        <div class="section-head">
+            <h2>Everything Your Drive Needs</h2>
+            <div class="rule"></div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🛞</div>
+                <h3>Shop Tires</h3>
+                <p>Browse performance, all-season, and all-terrain tires built for every road and season.</p>
+                <a class="more" href="#">Browse tires →</a>
+            </div>
+            <div class="card">
+                <div class="icon">🔧</div>
+                <h3>Auto Service</h3>
+                <p>Oil changes, brakes, alignments and more from certified technicians near you.</p>
+                <a class="more" href="#">Book service →</a>
+            </div>
+            <div class="card">
+                <div class="icon">💳</div>
+                <h3>Credit Card</h3>
+                <p>Special financing and exclusive savings with the Goodyear Credit Card.</p>
+                <a class="more" href="#">Apply now →</a>
+            </div>
+            <div class="card">
+                <div class="icon">📍</div>
+                <h3>Store Locator</h3>
+                <p>Find a nearby store or installer and schedule your visit in minutes.</p>
+                <a class="more" href="#">Find a store →</a>
+            </div>
+            <div class="card">
+                <div class="icon">🏷️</div>
+                <h3>Rebates &amp; Offers</h3>
+                <p>Check current promotions and submit your rebate to save even more.</p>
+                <a class="more" href="#">See offers →</a>
+            </div>
+            <div class="card">
+                <div class="icon">💬</div>
+                <h3>Need Help?</h3>
+                <p>Chat with our service agent in the corner for orders, warranty and support.</p>
+                <a class="more" href="#">Start a chat →</a>
+            </div>
+        </div>
+
+        <!-- CTA band -->
+        <div class="band">
+            <div>
+                <h2>Not Sure Which Tire?</h2>
+                <p>Answer a few questions and we'll match you with the perfect set.</p>
+            </div>
+            <a href="#" class="btn btn-yellow">Find Your Fit <span class="arrow">→</span></a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="news">
+                <h3>Sign Up for Offers &amp; More</h3>
+                <p>Get emails with special savings and expert tips.</p>
+            </div>
+            <form class="news-form" onsubmit="return false;">
+                <input type="email" placeholder="Enter your email" />
+                <button class="btn btn-blue" type="submit">Sign Up <span class="arrow">→</span></button>
+            </form>
+        </div>
+        <div class="footer-bottom">
+            <div class="links">
+                <a href="#">Accessibility</a>
+                <a href="#">Terms &amp; Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Site Map</a>
+            </div>
+            <div class="socials">
+                <a href="#" title="LinkedIn">in</a>
+                <a href="#" title="Instagram">◎</a>
+                <a href="#" title="YouTube">▶</a>
+                <a href="#" title="X">✕</a>
+                <a href="#" title="Facebook">f</a>
+            </div>
+        </div>
+        <div style="max-width:1120px;margin:18px auto 0;font-size:.76rem;color:#8a8e96;">
+            © 2026 Acme Tire Co. — demo page for embedded agent testing.
+        </div>
+    </footer>
+
+    <!-- Embedded Messaging snippet -->
+    <script type='text/javascript'>
+		function initEmbeddedMessaging() {
+			try {
+				embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+	
+				embeddedservice_bootstrap.init(
+					'00DTI000002wPxm',
+					'GY_Service_Chat_Support',
+					'https://goodyearmvp--elevatedev.sandbox.my.site.com/ESWGYServiceChatSuppor1779987171907',
+					{
+						scrt2URL: 'https://goodyearmvp--elevatedev.sandbox.my.salesforce-scrt.com'
+					}
+				);
+			} catch (err) {
+				console.error('Error loading Embedded Messaging: ', err);
+			}
+		};
+	</script>
+	<script type='text/javascript' src='https://goodyearmvp--elevatedev.sandbox.my.site.com/ESWGYServiceChatSuppor1779987171907/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+    <!-- GYChatChipRelayv5 — auto-message + chip-click relay (verbatim copy of the Salesforce static resource) -->
+    <script type='text/javascript'>
+		(function () {
+		    // Prevent the script from initializing multiple times
+		    if (window.goodyearChatChipRelayInitialized) {
+		        return;
+		    }
+		    window.goodyearChatChipRelayInitialized = true;
+		
+		    var allowedOrigins = [
+		        'https://sudarshannb-salesforce.github.io',
+				// VF host page origin
+		        window.location.origin,
+		        // Embedded Messaging / Experience Cloud host origin, please keep it as is
+		        'https://goodyearmvp--elevatedev.sandbox.my.site.com',
+		        // Optional VF canonical domain variant --  update below url to your webpage
+		        'https://goodyearmvp--elevatedev--c.sandbox.vf.force.com'
+		    ];
+		
+		    // Helper: Safely wait for the Chat API to be ready before sending any messages
+		    function waitForSendTextMessage(callback, retryCount) {
+		        retryCount = retryCount || 0;
+		
+		        if (
+		            window.embeddedservice_bootstrap &&
+		            window.embeddedservice_bootstrap.utilAPI &&
+		            typeof window.embeddedservice_bootstrap.utilAPI.sendTextMessage === 'function'
+		        ) {
+		            callback(window.embeddedservice_bootstrap.utilAPI.sendTextMessage);
+		            return;
+		        }
+		
+		        if (retryCount >= 20) {
+		            console.error('[Goodyear Chat Relay] sendTextMessage is still not available.');
+		            return;
+		        }
+		
+		        setTimeout(function () {
+		            waitForSendTextMessage(callback, retryCount + 1);
+		        }, 250);
+		    }
+		
+		// =======================================================================
+		    // FEATURE 1: Send automatic message when bot first joins
+		    // =======================================================================
+		    window.addEventListener("onEmbeddedMessagingFirstBotMessageSent", function() {
+		        console.log("[Goodyear Chat Relay] Received onEmbeddedMessagingFirstBotMessageSent event.");
+		
+		        // ADDED: A 1-second delay to prevent the race condition
+		        setTimeout(function() {
+		            console.log("[Goodyear Chat Relay] Delay complete, attempting to send auto-message...");
+		
+		            waitForSendTextMessage(function (sendTextMessage) {
+		                sendTextMessage
+		                    .call(window.embeddedservice_bootstrap.utilAPI, "[Initializing Main Menu...]")
+		                    .then(function () {
+		                        console.log("[Goodyear Chat Relay] Auto-Message sent successfully.");
+		                    })
+		                    .catch(function (error) {
+		                        console.error("[Goodyear Chat Relay] Auto-Message failed:", error);
+		                    });
+		            });
+		        }, 1000); // 1000 milliseconds = 1 second
+		    });
+		
+		    // =======================================================================
+		    // FEATURE 2: Listen for Chip clicks from the LWC and send them
+		    // =======================================================================
+		    window.addEventListener('message', function (event) {
+		        // Security check
+		        if (allowedOrigins.indexOf(event.origin) === -1) {
+		            return;
+		        }
+		
+		        var data = event.data;
+		
+		        // Ensure the message is actually from our LWC chip component
+		        if (!data || data.type !== 'goodyear.chatChipSelected') {
+		            return;
+		        }
+		
+		        var selectedValue = data.payload && data.payload.value;
+		
+		        if (!selectedValue) {
+		            console.error('[Goodyear Chat Relay] No selected value received.');
+		            return;
+		        }
+		
+		        console.log('[Goodyear Chat Relay] Received chip selection:', selectedValue);
+		
+		        // Send the chip text into the chat
+		        waitForSendTextMessage(function (sendTextMessage) {
+		            sendTextMessage
+		                .call(window.embeddedservice_bootstrap.utilAPI, selectedValue)
+		                .then(function () {
+		                    console.log('[Goodyear Chat Relay] Sent chip text to chat:', selectedValue);
+		                })
+		                .catch(function (error) {
+		                    console.error('[Goodyear Chat Relay] sendTextMessage failed:', error);
+		                });
+		        });
+		    });
+		
+		    console.log('[Goodyear Chat Relay] Initialized with auto-message and LWC listener.');
+		})();
+</script>
+</body>
+</html>
